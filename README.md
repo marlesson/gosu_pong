@@ -8,6 +8,7 @@ Dependencies:
 
 * [RVM](https://rvm.io/)
 * [bundler](http://bundler.io/)
+* [Gosu](https://github.com/jlnr/gosu/wiki)
 
 ```
 git clone git://github.com/marlesson/gosu_pong.git

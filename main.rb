@@ -65,6 +65,8 @@ end
 
 class Paddle
 
+  MOVE = 10
+
   def initialize()
     @blocks = []
 
@@ -79,13 +81,13 @@ class Paddle
   def up
     return if @blocks.first.y <= GameWindow.limit_top
     
-    @blocks.map{|b| b.y -= Block::BLOCK_SIZE }
+    @blocks.map{|b| b.y -= MOVE }
   end
 
   def down
     return if @blocks.last.y >= GameWindow.limit_botton
 
-    @blocks.map{|b| b.y += Block::BLOCK_SIZE }
+    @blocks.map{|b| b.y += MOVE }
   end
 
   def draw
