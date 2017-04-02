@@ -13,6 +13,10 @@ class Paddle
 
   end
 
+  def draw
+    @blocks.each(&:draw)
+  end
+  
   def up
     return if @blocks.first.y <= GameWindow.limit_top
     
@@ -25,9 +29,6 @@ class Paddle
     @blocks.map{|b| b.y += MOVE }
   end
 
-  def draw
-    @blocks.each(&:draw)
-  end
 
   def collision?(ball)
     @blocks.any?{|b| b.collision? ball}

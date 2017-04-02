@@ -13,11 +13,9 @@ class GameWindow < Gosu::Window
   def initialize
     super(WIDTH, HEIGHT, false)
     self.caption = 'Pong!'
-
     
     @font         = Gosu::Font.new(self, Gosu::default_font_name, 50)
     @font_score   = Gosu::Font.new(self, Gosu::default_font_name, 20)
-
     Block.sprite  = Gosu::Image.new(self, "images/pixel.png", true)
 
     @score        = 0 
@@ -42,7 +40,9 @@ class GameWindow < Gosu::Window
     @ball.move(@paddle)
 
     if @ball.pong?
-      @score += 1
+      @score += 1 
+
+      @ball.add_velocity if(@score%10 == 0)
     end
   end
 
@@ -54,7 +54,9 @@ class GameWindow < Gosu::Window
       @paddle.draw
     end
 
-    @font_score.draw_rel("SCORE: #{@score}", 40, 15, 5, 0.5, 0.5)
+    @font_score.draw_rel("SCORE: #{@score}", 50, 15, 5, 0.5, 0.5)
+    @font_score.draw_rel(" x #{@ball.velocity}", 22, 30, 5, 0.5, 0.5)
+
   end
 
   def game_over?

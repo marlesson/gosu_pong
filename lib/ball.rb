@@ -3,10 +3,14 @@ require 'forwardable'
 class Ball
   extend Forwardable
 
+  attr_reader :velocity
+
   def_delegators :@block, :x, :y
 
   def initialize
     @block        = Block.new(Block::BLOCK_SIZE, Block::BLOCK_SIZE)
+
+    @velocity     = 1
     @direction_x  = 10
     @direction_y  = 2
     @pong         = false
@@ -17,7 +21,8 @@ class Ball
   end
 
   def move(paddle)
-    @block.x += @direction_x
+
+    @block.x += @direction_x * @velocity
     @block.y += @direction_y
 
     if @block.x >= GameWindow.limit_right
@@ -42,5 +47,9 @@ class Ball
 
   def pong?
     @block.x >= GameWindow.limit_right
+  end
+
+  def add_velocity
+    @velocity += 0.1
   end
 end
