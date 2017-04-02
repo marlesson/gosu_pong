@@ -24,7 +24,6 @@ class GameWindow < Gosu::Window
   end
 
   def update
-
     if button_down? Gosu::KbEnter or button_down?Gosu::KbReturn or button_down? Gosu::GpButton9
       self.reset_play
     end  
@@ -40,9 +39,8 @@ class GameWindow < Gosu::Window
     @ball.move(@paddle)
 
     if @ball.pong?
-      @score += 1 
-
-      @ball.add_velocity if(@score%10 == 0)
+      add_score
+      add_velocity
     end
   end
 
@@ -55,8 +53,7 @@ class GameWindow < Gosu::Window
     end
 
     @font_score.draw_rel("SCORE: #{@score}", 50, 15, 5, 0.5, 0.5)
-    @font_score.draw_rel(" x #{@ball.velocity}", 22, 30, 5, 0.5, 0.5)
-
+    @font_score.draw_rel(" x #{(@ball.velocity.to_f/100)*100}", 22, 30, 5, 0.5, 0.5)
   end
 
   def game_over?
@@ -69,6 +66,13 @@ class GameWindow < Gosu::Window
     @ball    = Ball.new    
   end
 
+  def add_score
+    @score += 10
+  end
+
+  def add_velocity
+    @ball.add_velocity if(@score%100 == 0)
+  end
   #Limits
 
   def self.limit_left 

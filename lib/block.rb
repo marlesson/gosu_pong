@@ -16,9 +16,10 @@ class Block
   end
 
   def collision?(block)
-    block.x >= self.x and 
-    block.x <= self.x + BLOCK_SIZE+1 and
-    block.y >= self.y and 
-    block.y <= self.y + BLOCK_SIZE+1 
+    #(self.x + BLOCK_SIZE)
+    block.x >= self.x - BLOCK_SIZE and 
+    block.x <= self.x + BLOCK_SIZE and
+    block.y >= self.y - BLOCK_SIZE and 
+    block.y <= self.y + BLOCK_SIZE 
   end
 end
